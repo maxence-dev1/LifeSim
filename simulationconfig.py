@@ -16,7 +16,7 @@ class SimulationConfig:
         self.vision_mu = 200
         self.vision_sigma = 100
         self.print_grille = False
-        self.fps = 20
+        self.fps = -1
         self.abundance_zone = False
         self.screen = screen
         self.state_menu = state_mene
@@ -66,7 +66,7 @@ class SimulationConfig:
 
 
 
-    def init_all(self, interface = True):
+    def init_unique_simulation(self, interface = True):
         if not interface:
             self.running[0] = True
             return
@@ -186,7 +186,7 @@ class SimulationConfig:
             onchange=lambda val: setattr(self, "fps", int(val)),
         )
 
-    def init_all_several_simulation(self, infos):
+    def init_several_simulation(self, infos):
             self.menu.add.button("Jouer", self.start)
             self.menu.add.button("Quitter", pygame_menu.events.EXIT)
             self.menu.add.text_input(

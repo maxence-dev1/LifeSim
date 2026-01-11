@@ -3,7 +3,7 @@ import pygame, pygame_gui, pygame_menu, numpy, food, random, minos, math
 
 class Engine():
     def __init__(self, width, height, ratio_food, running, d, multiple_mode = False, screen = None, manager = None, use_abundance_zone = False):
-        self.d = d
+        self.draw = d
         if not multiple_mode:  
             self.screen = screen
             self.manager = manager
@@ -12,7 +12,6 @@ class Engine():
         self.clock = pygame.time.Clock()
         self.running = running
         self.food_data = []
-        self.frame_list = []
         self.width_square = 100
         self.heigh_square = 100
         self.width = width
@@ -105,6 +104,7 @@ class Engine():
                 self.minos_list_id[i,5] = 0
                 self.food_data.append([m.jauge_faim])
                 self.minos_list.append(m)
+        print(self.minos_list)
     
     def init_abundance_zone(self):
         self.abundance_zone = [random.randint(0,self.width - 300), random.randint(0,self.height-300), 300, 300]
@@ -122,7 +122,7 @@ class Engine():
             
 
     def draw_abundance_zone(self):
-        self.d.draw_abundance_zone(self.abundance_zone)
+        self.draw.draw_abundance_zone(self.abundance_zone)
 
 
     def update_food(self):
@@ -196,7 +196,7 @@ class Engine():
                 if 0 <= ligne < self.grid.shape[0] and 0 <= colonne < self.grid.shape[1]:
                     food_list_to_see_collisions.extend(self.grid[int(ligne), int(colonne)])
             if afficher_jeu:
-                self.d.draw_mino(mino)
+                self.draw.draw_mino(mino)
                 #Mtn il faut trouver quel(s) cases envoyer au minos
                 mino.update(self.nb_frame, self.food_list, food_list_to_see_collisions)
             else : 
@@ -206,7 +206,7 @@ class Engine():
 
     def print_grid(self, print_grille):
         
-        self.d.print_background()
+        self.draw.print_background()
         if print_grille:
              for i in range(self.nb_col):
                   for j in range(self.nb_row):

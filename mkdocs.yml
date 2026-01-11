@@ -15,7 +15,11 @@ nav:
     - Minos : Explication/minos.md
     - Nourriture : Explication/nourriture.md
     - Environnement : Explication/environnement.md
-  - Architecture: architecture.md
+  - Architecture: 
+    - moteur : Architecture/moteur.md
+    - Minos : 
+    - Ressources : 
+    - Affichage : 
   - Guide d'installation: installation.md
 
 markdown_extensions:

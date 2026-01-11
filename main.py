@@ -59,15 +59,15 @@ def main_mode_choice():
     
     
     mode_choice_menu.add.label("Veuillez choisir votre mode\n")
-    mode_choice_menu.add.label("Simulation simple\n")
+    mode_choice_menu.add.label("\nSimulation simple")
     switch_one = mode_choice_menu.add.toggle_switch(
-            title="Faire une seule simulation ",
+            title="Faire une seule simulation",
             default=one_simulation[0],
             onchange=lambda value: toggle_one_simulation(one_simulation, switch_one, switch_several),
             width=60
         )
     
-    mode_choice_menu.add.label("several simulations ")
+    mode_choice_menu.add.label("\nseveral simulations ")
     switch_several =  mode_choice_menu.add.toggle_switch(
             title="Faire plusieurs simulations ",
             default= not one_simulation[0],
@@ -76,7 +76,7 @@ def main_mode_choice():
         )
 
 
-    mode_choice_menu.add.button("Valider", lambda: valider(running_mode_choice))
+    mode_choice_menu.add.button("\nValider", lambda: valider(running_mode_choice))
     
     
     
@@ -104,7 +104,7 @@ def several_simulations():
     infos = [1,50,2,100,1,10] #mino min, minos max, minos pas, food min, food max, pas
     screen = pygame.display.set_mode((2000, 1000))
     config = simulationconfig.SimulationConfig(2000, 1000, screen, state_menu, None)
-    config.init_all_several_simulation(infos)
+    config.init_several_simulation(infos)
     
 
 
@@ -137,6 +137,7 @@ def several_simulations():
 
 def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
     pygame.init()
+    fps_list = []
     if nb_minos is None:
         WIDTH = 1999
         HEIGHT = 1000
@@ -153,7 +154,7 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
 
         config = simulationconfig.SimulationConfig(WIDTH, HEIGHT, screen, state_menu, running)
 
-        config.init_all()
+        config.init_unique_simulation()
         
 
 
@@ -216,9 +217,8 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
                 engine.update_abundance_zone()
 
             if engine.minos_dead == config.nb_minos:
-                print("FINI")
                 running[0] = False
-            
+            fps_list.append(clock.get_fps())
             if config.afficher_jeu:
                 engine.print_grid(config.print_grille)
                 d.draw_all_mino(engine.minos_list)
@@ -240,10 +240,13 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
                     pygame.display.flip()
                     one = False
 
+        
+        print("moyenne FPS : ", sum(fps_list)/len(fps_list))
+        
         pd.set_option("display.max_rows", 100)
         df_minos = pd.DataFrame(engine.minos_list_id, columns=["id", "resistance", "vitesse", "satiete", "vision", "time_lived", "food_eaten", "distance_traveled"])
         df_minos["ratio_food"] = engine.ratio_food
-        print(df_minos)
+        # print(df_minos)
         id1 = df_minos["time_lived"].idxmax()
         print("best : ", engine.minos_list[id1].nb_time_in_abundance_zone)
         id2 = df_minos["time_lived"].idxmin()
@@ -267,7 +270,7 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         config = simulationconfig.SimulationConfig(width, height, None, state_menu, running)
         config.fps = -1
         config.nb_minos = nb_minos
-        config.init_all(False)
+        config.init_unique_simulation(False)
         
         
         

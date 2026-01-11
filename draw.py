@@ -9,6 +9,7 @@ class Draw():
         self.width = width
         self.height = height
         self.background = pygame.image.load("fond.png").convert()
+        
     
     def fill_screen(self, new_color = (255,255,255)):
         """Rempli l'écran d'une certaine couleur"""
