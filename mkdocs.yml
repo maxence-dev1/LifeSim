@@ -7,6 +7,7 @@ theme:
 
 plugins:
   - search
+  - glightbox
   - mermaid2
 
 nav:
@@ -17,9 +18,11 @@ nav:
     - Environnement : Explication/environnement.md
   - Architecture: 
     - moteur : Architecture/moteur.md
-    - Minos : 
-    - Ressources : 
-    - Affichage : 
+    - Minos : Architecture/minos.md
+    - Ressources : Architecture/Nourriture.md
+    - Affichage : Architecture/moteur.md
+  - Statistiques : Statistiques/statistiques.md
+  - Machine Learning : ML/ml.md
   - Guide d'installation: installation.md
 
 markdown_extensions:
@@ -28,8 +31,34 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+
+theme:
+  name: material
+  palette:
+    scheme: slate 
+  features:
+    - content.code.copy
+    - content.code.annotate 
+
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ton-pseudo
+copyright: 'Copyright &copy; 2026 - Julienne Maxence'

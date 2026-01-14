@@ -104,7 +104,6 @@ class Engine():
                 self.minos_list_id[i,5] = 0
                 self.food_data.append([m.jauge_faim])
                 self.minos_list.append(m)
-        print(self.minos_list)
     
     def init_abundance_zone(self):
         self.abundance_zone = [random.randint(0,self.width - 300), random.randint(0,self.height-300), 300, 300]
@@ -195,6 +194,8 @@ class Engine():
             for ligne, colonne in cases_chevauchée:
                 if 0 <= ligne < self.grid.shape[0] and 0 <= colonne < self.grid.shape[1]:
                     food_list_to_see_collisions.extend(self.grid[int(ligne), int(colonne)])
+
+
             if afficher_jeu:
                 self.draw.draw_mino(mino)
                 #Mtn il faut trouver quel(s) cases envoyer au minos

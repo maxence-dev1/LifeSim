@@ -63,25 +63,16 @@ Pour optimiser les performances, l'espace est divisé en différents secteurs vi
 !!! info "Optimisation" 
     Au lieu de scanner toute la carte pour trouver sa prochaine destination, le minos va uniquement regarder les cases de la grille où il est actuellement. 
 
+
+|            **1 Minos 2000 nourritures**            |  **100 Minos, 10 nourriture par entité**  |
+| :------------------------------------------------: | :---------------------------------------: |
+| ![Photo 1](illustratio_optimisation_2000_food.png) | ![Photo 2](illustration_optimisation.png) |
+|                     *~100 fps*                     |                *~115 fps*                 |
+
+*Les fonctions d'affichage consomment beaucoup de ressources, faire sans augmente drastiquement les performances (~x10)*
+
 ### Fonctions clés : 
 - `update_all_minos` : Actualise entierement chaque Minos ainsi que les données à récolter.
 - `update_food` : Gère la reconstruction de la grille et l'apparition de la nourriture.
 - `update_abundance_zone` : Gère les déplacements de la zone d'abondance.
 
-
-## Principales fonctions : 
-Voici la liste des fonctions interessantes :
-différentes fonctions init_ pour initier certaines composantes
-update_food : Actualiser la nourriture sur la carte
-update_all_minos : Actualise les minos
-
-
-
-
-
-
-
-
-
-L'espace : Le monde dans lequel se déroule la simulatione est une carte 2d de taille variable. 
-Le temps : La gestion du temps est basées sur les frames. Ainsi, peu importe les performances de la machine, on obtiendra des résultats parlant

@@ -3,12 +3,12 @@ Un **minos** est une entité biologique simple dont l'objectif unique est la sur
 ## Attributs et génétique
 Chaque minos possède 4 attributs définis à la naissance selon une **loi Normale**. Ces attributs sont fixés et impactent directement la consommation d'énergie.
 
-| Attribut         | Description                                                       | Impact Énergétique |
-| :--------------- | :---------------------------------------------------------------- | :----------------- |
-| **Résistance**   | Capacité maximale de la jauge de nourriture.                      | Moyen              |
-| **Vitesse**      | Rapidité de déplacement sur la carte.                             | Très Élevé         |
-| **Assimilation** | Efficacité nutritive (quantité de nourriture gagnée en mangeant). | Nul                |
-| **Vision**       | Rayon de détection de la nourriture.                              | Faible             |
+| Attribut       | Description                                  | Impact Énergétique |
+| :------------- | :------------------------------------------- | :----------------- |
+| **Résistance** | Capacité maximale de la jauge de nourriture. | Moyen              |
+| **Vitesse**    | Rapidité de déplacement sur la carte.        | Très Élevé         |
+| **Satiété**    | Gain d'énergie par nourriture                | Nul                |
+| **Vision**     | Rayon de détection de la nourriture.         | Faible             |
 
 
 Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représenté par une dépense d'énergie plus importante
@@ -23,7 +23,7 @@ Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représent�
 
 
 ### **Vie et comportement** : à chaque instant, le Minos analyse son environnement
-1. **Zone d'abondance** : S'il en détecte une, il s'y dirige immédiatement
+1. **Zone d'abondance** : S'il en détecte une, il s'y dirige immédiatement oubliant les autres nourritures
 2. **Recherche active** : Sinon, il choisi la nourriture la plus proche
 3. **Errance** : si aucune nourriture n'est visible, il se dirige vers un point aléatoire. Cela augmentera sa consommation
 
@@ -58,3 +58,6 @@ Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représent�
 - **Couleur du corps** : Varie du **vert** (rassasié) au **rouge** (Affamé)
 - **Contour** :  Passe au **jaune** lorsque le Minos sprint
 - **Corps noir** : Minos mort
+
+
+Vous trouverez plus d'informations techniques dans la partie [Architecture des Minos](../Architecture/minos.md)

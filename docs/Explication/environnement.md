@@ -25,6 +25,11 @@ L'affichage s'adapte à la densité de Minos sur la carte :
 * **Échelle :** Le niveau de zoom varie selon le nombre total de Minos.
 * **Rendu :** La taille visuelle des Minos et des ressources est calculée proportionnellement au zoom pour maintenir une visibilité optimale.
 
+|   **Simulation avec 15 Minos**    |   **Simulation avec 2000 Minos**    |
+| :-------------------------------: | :---------------------------------: |
+| ![Photo 1](illustration_zoom.png) | ![Photo 2](illustration_dezoom.png) |
+
+
 ---
 
 ## La Zone d'Abondance

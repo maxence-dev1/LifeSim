@@ -5,8 +5,8 @@ class SimulationConfig:
         self.full_screen = False
         self.print_vision = False
         self.afficher_jeu = True
-        self.nb_minos = 100
-        self.ratio_food = 0.3
+        self.nb_minos = 1
+        self.ratio_food = 500
         self.resistance_mu = 2
         self.resistance_sigma = 1
         self.vitesse_mu = 6

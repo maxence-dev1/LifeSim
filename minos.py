@@ -32,7 +32,7 @@ class Mino:
         self.mort = False
         self.to_clear = False
         self.food_list = []
-        self.food_list_to_see_collisions = []
+        self.food_list_to_see_before = []
         self.destination_food = None
         self.destinationx = None
         self.destinationy = None
@@ -55,13 +55,13 @@ class Mino:
         self.consommation_fixe = 0.5 
 
     
-    def update(self, nb_frame, food_list, food_list_to_see_collisions):
+    def update(self, nb_frame, food_list, food_list_to_see_before):
         """Actualise entierement un mino"""
         #print(f"{self.jauge_faim}/{self.max_jauge_faim}")
         #print(f"{self.jauge_faim}/{self.max_jauge_faim}")
         if not self.mort : 
-            #print(f"food_list : {len(food_list)}, foo_list_to_see_collision : {len(food_list_to_see_collisions)}")
-            self.food_list_to_see_collisions = food_list_to_see_collisions
+            #print(f"food_list : {len(food_list)}, foo_list_to_see_collision : {len(food_list_to_see_before)}")
+            self.food_list_to_see_before = food_list_to_see_before
             self.food_list = food_list
             self.time_lived = nb_frame
             self.verif_sprint_mode()
@@ -74,10 +74,10 @@ class Mino:
             if (self.color[0]<1):
                 self.to_clear = True
     
-    def update_speed(self, nb_frame, food_list, food_list_to_see_collisions):
+    def update_speed(self, nb_frame, food_list, food_list_to_see_before):
         """Actualise un mino sauf les fonctions visuelles"""
         if not self.mort :
-            self.food_list_to_see_collisions = food_list_to_see_collisions
+            self.food_list_to_see_before = food_list_to_see_before
             self.food_list = food_list
             self.time_lived = nb_frame
             self.go_to_destination()
@@ -100,7 +100,7 @@ class Mino:
 
     def is_on_food(self):
         #On vérifie uniquement les collisions avec les food dont il chevauche les cases
-        for f in self.food_list_to_see_collisions:
+        for f in self.food_list_to_see_before:
                 if (self.x<=f.x - 5 <=self.x + self.width or  self.x<=f.x +5 <=self.x + self.width)   and (self.y<=f.y+5<=self.y + self.height or self.y<=f.y -5 <=self.y + self.height) and not f.to_destroy:
                     self.food_eaten+=1
                     
@@ -166,7 +166,7 @@ class Mino:
     def find_destination(self, do_random = True):
         """Trouve une nouvelle destination de nourriture ou aller"""
         #On regarde d'abord dans le voisinage
-        dist_min_local, x_local, y_local, food_local = self.get_closer_food(self.food_list_to_see_collisions)
+        dist_min_local, x_local, y_local, food_local = self.get_closer_food(self.food_list_to_see_before)
         if food_local is not None and dist_min_local <= self.vision:
             self.destination_food = food_local
             self.destinationx = x_local
