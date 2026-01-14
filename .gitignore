@@ -2,8 +2,9 @@
 venv/
 ENV/
 .env 
-
+*.html
 __pycache__/
 .log
-
+tempCodeRunnerFile.*
 .vscode/
+*.pyc
