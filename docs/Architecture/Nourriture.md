@@ -14,7 +14,7 @@ La classe `Food` représente les ressources énergétiques dispersées sur la ca
 
 ## Cycle de vie : 
 1. **Apparition** : Généré par l'`Engine` soit au début, soit lors du réaprovisionnement, dans une zone d'abondance ou non.
-2. **Consommation** : Lorsqu'un Minos consomme la nourriture, elle est marquée to_destroy. Elle est donc ignorée par les autre Minos avant d'être détruite au prochain tours de boucle. 
-3. **Disparition** : La nourriture est marquée to_destroy si elle est mangée ou si elle était dans une zone d'abondance qui vient de se déplacer. A chaque tours de boucle, les nourritures marquées to_destroy ne sont pas régénérées et sont exclues de la grille. 
+2. **Consommation** : Lorsqu'un Minos consomme la nourriture, elle est marquée to_destroy. Elle est donc ignorée par les autres Minos avant d'être détruite au prochain tour de boucle. 
+3. **Disparition** : La nourriture est marquée to_destroy si elle est mangée ou si elle était dans une zone d'abondance qui vient de se déplacer. A chaque tour de boucle, les nourritures marquées to_destroy ne sont pas régénérées et sont exclues de la grille. 
 
 

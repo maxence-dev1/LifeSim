@@ -20,7 +20,7 @@ nav:
     - moteur : Architecture/moteur.md
     - Minos : Architecture/minos.md
     - Ressources : Architecture/Nourriture.md
-    - Affichage : Architecture/moteur.md
+    - Affichage : Architecture/affichage.md
   - Statistiques : Statistiques/statistiques.md
   - Machine Learning : ML/ml.md
   - Guide d'installation: installation.md

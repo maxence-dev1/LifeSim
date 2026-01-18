@@ -1,10 +1,10 @@
-.csv
+*.csv
 venv/
 ENV/
-.env 
+*.env 
 *.html
 __pycache__/
-.log
+*.log
 tempCodeRunnerFile.*
-.vscode/
+*.vscode/
 *.pyc

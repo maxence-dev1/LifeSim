@@ -101,7 +101,7 @@ def main_mode_choice():
 
 def several_simulations():
     state_menu = [True] 
-    infos = [1,50,2,100,1,10] #mino min, minos max, minos pas, food min, food max, pas
+    infos = [1,3,1,10,1,1] #mino min, minos max, minos pas, food min, food max, pas
     screen = pygame.display.set_mode((2000, 1000))
     config = simulationconfig.SimulationConfig(2000, 1000, screen, state_menu, None)
     config.init_several_simulation(infos)
@@ -118,12 +118,13 @@ def several_simulations():
                     config.start()
             
         config.menu_update(events)
-    
+    print(infos)
     big_data = []
     for nb_minos in range(infos[0],infos[1],infos[2]): 
         for ratio in range(infos[4],infos[3],infos[5]):
             res = main(nb_minos,1/ratio)
-            df_sim = res[0]
+            df_sim = res[0][["resistance", "vitesse", "satiete", "vision", "time_lived"]]
+            print(df_sim)
             df_sim["nb_minos"] = nb_minos
             df_sim["ratio_food"] = 1/ratio
             big_data.append(df_sim)

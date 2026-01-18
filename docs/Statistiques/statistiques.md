@@ -3,7 +3,7 @@
 Le projet LifeSim intègre un système de récolte de données, conçu pour le moment pour l'analyse scientifique de la survie et l'entrainement de modèles de Machine Learning.
 
 
-## Mide simulation simple :
+## Mode simulation simple :
 
 En mode unique, la priorité est la visualisation immédiate des données. 
 
@@ -20,7 +20,7 @@ Pendant que la simulation tourne, les données sont accumulées en mémoire puis
 | Dynamique internes | évolution de la jauge de faim, temps vécu | Identifier les points fort de la vie d'un Minos             |
 
 ### Rendu visuel
-A la fermeture de la fenetre, le système génère automatiquement des graphiques 
+A la fermeture de la fenêtre, le système génère automatiquement des graphiques 
 Voici quelques exemples : 
 
 ![Photo 1](distrib_satiete.png)
@@ -39,10 +39,10 @@ Voici quelques exemples :
 
 ## Mode simulation multiples : 
 
-En mode multiple, le but est de génerer des Datasets massifs. Chaque simulation vient nourrit une base de donnée globale au format CSV.
+En mode multiple, le but est de génerer des Datasets massifs. Chaque simulation vient nourrire une base de données globale au format CSV.
 
 ### Structure du fichier CSV
-Chaque ligne réprésente toutes les information d'un Minos.
+Chaque ligne réprésente toutes les informations d'un Minos.
     
 | id   | resistance | vitesse | satiete | vision | time_lived | food_eaten | distance_traveled | nb_minos | ratio_food |
 | :--- | :--------- | :------ | :------ | :----- | :--------- | :--------- | :---------------- | :------- | :--------- |
@@ -56,4 +56,4 @@ Chaque ligne réprésente toutes les information d'un Minos.
 
 ### Potentiel pour Machine Learning
 
-Ces lignes permettent d'isoler chaque Minos et de comprendre dans quel cas il survit bien. Ces données sont idéales pour des algorithme de Machin Learning 
+Ces lignes permettent d'isoler chaque Minos et de comprendre dans quel cas il survit bien. Ces données sont idéales pour des algorithmes de Machin Learning 

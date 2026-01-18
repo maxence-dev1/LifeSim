@@ -1,4 +1,4 @@
-# Spécifications de l'Environnement
+# Spécificités de l'Environnement
 
 ---
 
@@ -36,8 +36,8 @@ L'affichage s'adapte à la densité de Minos sur la carte :
 
 La zone d'abondance est un rectangle dynamique conçu pour stimuler la sélection naturelle par la compétition.
 
-| Propriété      | Détails                                                                             |
-| :------------- | :---------------------------------------------------------------------------------- |
-| **Dimensions** | Variable entre **200px** et **400px** (côté).                                       |
-| **Mobilité**   | Déplacement aléatoire toutes les **70 à 250 frames**.                               |
-| **Rôle**       | Augmente la **densité** de nourriture d'une zone afin de favoriser les Minos mobile |
+| Propriété      | Détails                                                                              |
+| :------------- | :----------------------------------------------------------------------------------- |
+| **Dimensions** | Variable entre **200px** et **400px** (côté).                                        |
+| **Mobilité**   | Déplacement aléatoire toutes les **70 à 250 frames**.                                |
+| **Rôle**       | Augmente la **densité** de nourriture d'une zone afin de favoriser les Minos mobiles |

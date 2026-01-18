@@ -11,20 +11,20 @@ Chaque minos possède 4 attributs définis à la naissance selon une **loi Norma
 | **Vision**     | Rayon de détection de la nourriture.         | Faible             |
 
 
-Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représenté par une dépense d'énergie plus importante
+Comme dans la vraie vie, chaque attribut à un **cout** qui est ici représenté par une dépense d'énergie plus importante
 
 ## Cycle de vie
 
 
 
 ### **Naissance** :  le Minos apparait aléatoirement sur la carte
-- **Jauge initiale** : 100 unités + 25% de sa capacité max
-- **Génétique** : Les attributs sont tirés au sort (Loi Normale), créant une population variée avec des individus moyen et quelques exeptions. 
+- **Jauge initiale** : 100 unités + 25% de sa capacité maximale
+- **Génétique** : Les attributs sont tirés au sort (Loi Normale), créant une population variée avec des individus moyens et quelques exceptions. 
 
 
 ### **Vie et comportement** : à chaque instant, le Minos analyse son environnement
 1. **Zone d'abondance** : S'il en détecte une, il s'y dirige immédiatement oubliant les autres nourritures
-2. **Recherche active** : Sinon, il choisi la nourriture la plus proche
+2. **Recherche active** : Sinon, il choisit la nourriture la plus proche
 3. **Errance** : si aucune nourriture n'est visible, il se dirige vers un point aléatoire. Cela augmentera sa consommation
 
 !!! info "Alimentation"
@@ -37,13 +37,13 @@ Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représent�
 
 ### **Mode urgence (sprint)** : si la jauge de nourriture descend en dessous des 50% et qu'une nourriture est visible : 
 - La bordure du Minos devient jaune
-- Sa vitese est doublé
+- Sa vitesse est doublée
 - Sa consommation d'énergie augmente drastiquement
 
-### **Mort** : Lorsque la jauge de nourriture atteind 0, le Minos meurt. Il devient noir avant de disparaitre.
+### **Mort** : Lorsque la jauge de nourriture atteint 0, le Minos meurt. Il devient noir avant de disparaitre.
 
 !!! info "Modèle de consommation énergétique"
-    La consommation d'un Minos est calculé à chaque frame. Ce modèle garantit un équilibre entre les capacités physique et la survie.
+    La consommation d'un Minos est calculée à chaque frame. Ce modèle garantit un équilibre entre les capacités physiques et la survie.
 
     **Formule :**
     
@@ -56,7 +56,7 @@ Comme dans la vraie vie, chaque attribut à un **coût** qui est ici représent�
 
 ### Indicateurs Visuels : 
 - **Couleur du corps** : Varie du **vert** (rassasié) au **rouge** (Affamé)
-- **Contour** :  Passe au **jaune** lorsque le Minos sprint
+- **Contour** :  Passe au **jaune** lorsque le Minos sprinte
 - **Corps noir** : Minos mort
 
 

@@ -6,7 +6,7 @@ Cette section détaille le fonctionnement interne de la simulation, du point d'e
 
 ## 1. Point d'entrée : Main
 
-Le fichier `main.py` a le role de chef d'orchestre, il initialise les composant et gère la boucle principale.
+Le fichier `main.py` a le rôle de chef d'orchestre, il initialise les composants et gère la boucle principale.
 
 ### Boucle principale (`running`)
 En simulation simple ou multiple, la boucle principale suit les mêmes étapes:
@@ -18,7 +18,7 @@ En simulation simple ou multiple, la boucle principale suit les mêmes étapes:
 
 ## 2. Configuration (`SimulationConfig`)
 
-Cette classe centralise les variables globales et le paramétrage. Elle garantit l'initialisation et la juste distributions des variables globale et des constante.
+Cette classe centralise les variables globales et le paramétrage. Elle garantit l'initialisation et la juste distribution des variables globales et des constantes.
 
 ### Paramètre de la simulation :
 | Catégorie         | Attribut                   | Description                                      |
@@ -48,7 +48,7 @@ Voici comment les principaux attributs de `Engine` sont structurés :
 - **Gestion des entités** : 
     - `minos_list` : liste de tous les Minos de la simulation
     - `food_list`: Liste des nourritures sur la carte
-    - `minos_dead` : nombre de Minos mort
+    - `minos_dead` : nombre de Minos morts
 - **Mécanisme internes**:
     - `grid` : Référence vers la grille
     - `abundance_zone` : rectangle de la zone d'abondance [x,y,width, height]
@@ -64,7 +64,7 @@ Pour optimiser les performances, l'espace est divisé en différents secteurs vi
     Au lieu de scanner toute la carte pour trouver sa prochaine destination, le minos va uniquement regarder les cases de la grille où il est actuellement. 
 
 
-|            **1 Minos 2000 nourritures**            |  **100 Minos, 10 nourriture par entité**  |
+|            **1 Minos 2000 nourritures**            | **100 Minos, 10 nourritures par entité**  |
 | :------------------------------------------------: | :---------------------------------------: |
 | ![Photo 1](illustratio_optimisation_2000_food.png) | ![Photo 2](illustration_optimisation.png) |
 |                     *~100 fps*                     |                *~115 fps*                 |
@@ -72,7 +72,7 @@ Pour optimiser les performances, l'espace est divisé en différents secteurs vi
 *Les fonctions d'affichage consomment beaucoup de ressources, faire sans augmente drastiquement les performances (~x10)*
 
 ### Fonctions clés : 
-- `update_all_minos` : Actualise entierement chaque Minos ainsi que les données à récolter.
+- `update_all_minos` : Actualise entièrement chaque Minos ainsi que les données à récolter.
 - `update_food` : Gère la reconstruction de la grille et l'apparition de la nourriture.
 - `update_abundance_zone` : Gère les déplacements de la zone d'abondance.
 

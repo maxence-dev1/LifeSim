@@ -199,31 +199,31 @@ class SimulationConfig:
                 "nombre minos maximal: ",
                 default=str(infos[1]),
                 input_type=pygame_menu.locals.INPUT_INT,
-                onchange=lambda value: infos.__setitem__(0, int(value) if value else 0)
+                onchange=lambda value: infos.__setitem__(1, int(value) if value else 0)
             )
             self.menu.add.text_input(
                 "pas nombre minos: ",
                 default=str(infos[2]),
                 input_type=pygame_menu.locals.INPUT_INT,
-                onchange=lambda value: infos.__setitem__(0, int(value) if value else 0)
+                onchange=lambda value: infos.__setitem__(2, int(value) if value else 0)
             )
             self.menu.add.text_input(
                 "ratio food minimal: ",
                 default=str(infos[3]),
                 input_type=pygame_menu.locals.INPUT_INT,
-                onchange=lambda value: infos.__setitem__(0, int(value) if value else 0)
+                onchange=lambda value: infos.__setitem__(3, int(value) if value else 0)
             )
             self.menu.add.text_input(
                 "ratio food maximal: ",
                 default=str(infos[4]),
                 input_type=pygame_menu.locals.INPUT_INT,
-                onchange=lambda value: infos.__setitem__(0, int(value) if value else 0)
+                onchange=lambda value: infos.__setitem__(4, int(value) if value else 0)
             )
             self.menu.add.text_input(
                 "pas ratio food: ",
                 default=str(infos[5]),
                 input_type=pygame_menu.locals.INPUT_INT,
-                onchange=lambda value: infos.__setitem__(0, int(value) if value else 0)
+                onchange=lambda value: infos.__setitem__(5, int(value) if value else 0)
             )
 
             return
