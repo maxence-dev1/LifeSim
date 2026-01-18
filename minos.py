@@ -113,8 +113,8 @@ class Mino:
     def update_jauge_faim(self):
         """Actualise la jauge de faim"""
         cout_base = self.consommation_fixe +(self.resistance*0.1)+(self.vision*0.001)
-        cout_effort = self.vitesse**1.3*self.resistance*0.005
-        malus_recherche = 0.25 if not self.destination_food else 0 
+        cout_effort = self.vitesse**1.95*self.resistance*0.002
+        malus_recherche = 0.5 if not self.destination_food else 0 
         self.jauge_faim -= (cout_base + cout_effort + malus_recherche)
         #Le bonus de départ
         if self.jauge_faim <self.max_jauge_faim and not self.start_bonus_used :

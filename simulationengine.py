@@ -114,8 +114,8 @@ class Engine():
             for f in self.food_list:
                 if  self.abundance_zone[0] <= f.x <= self.abundance_zone[0] + self.abundance_zone[2] and self.abundance_zone[1] <= f.y <= self.abundance_zone[1] + self.abundance_zone[3]:
                     f.to_destroy = True
-            new_width = random.randint(200,400)
-            new_height = random.randint(200,400)
+            new_width = random.randint(250,550)
+            new_height = random.randint(250,550)
             self.abundance_zone = [random.randint(0,self.width - new_width), random.randint(0,self.height-new_height), new_width, new_height]
             self.time_next_move_abundance_zone = self.nb_frame + random.randint(70, 250)
             
@@ -136,13 +136,16 @@ class Engine():
                 cellule_liste.clear()
         self.food_list = [f for f in self.food_list if not f.to_destroy]
         i=0
+        print(self.use_abundance_zone)
         if self.use_abundance_zone:
+
             while (len(self.food_list)<self.nb_food):
                 
                 if self.compteur_ajouter_food %4 != 0:
                     f = food.Food(random.randint(10, self.width-10), random.randint(10,self.height-10), self.size_food )
                     self.food_list.append(f)
                 else : 
+                    print("ajout abundance")
                     f = food.Food(random.randint(self.abundance_zone[0], self.abundance_zone[0] + self.abundance_zone[2]), random.randint(self.abundance_zone[1],self.abundance_zone[1] + self.abundance_zone[3]), self.size_food, True)
                     if random.randint(1,3)%3 != 0:
                         f.color = (239,191,4)

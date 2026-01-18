@@ -10,9 +10,9 @@ class Food():
         self.to_destroy = False
         if random.randint(1,15)%15 == 0:
             self.color = (239,191,4)
-            self.valeur = 35
+            self.valeur = 50
         else :
             self.color = (0,0,255)
-            self.valeur = 25
+            self.valeur = 40
 
         

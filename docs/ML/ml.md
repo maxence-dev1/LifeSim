@@ -3,6 +3,13 @@
 Ici, vous trouverez un "journal de bord" des principales étapes de la création de mon modèle de Machin Learning. (Cette page me servirat de memento aussi).
 
 
+D'abord, j'ai créé une nouvelle branche sur github intitulée "V3-ML". Cette branche aura moins d'interface et sera moins "user-friendly" que les autres versions. Cela se déroulera principalement dans la console ou l'utilisateur aura le choix de comment remplir ses données. Il pourra choisir l'esperence et la variance de ses attributs. Il pourra aussi choisir le nombre de fois que toutes les simulations vont se répeter pour des données plus solides. Une fois cela fait, le modèle de ML lui dira quels sont les gènes les plus important dans une simulation pauvre, une simulation équilibrée et une simulation riche (qui seront déjà définies). Le modèle sera capable de prédire sur ces données un échantillon de Minos qui sont susceptible de survivre le plus longtemps.  Enfin, l'utilisateur aura la possibilité de regarder X simulations où les Minos susceptibles de survivre auront un marquage.
+
+Ici, je fais le choix de ne pas modifier ma simulation pour rendre les données linéaires. J'aimerai avoir des données plus claires avec des constantes correctes mais c'est un peu brouillon. je laisse donc mes données en forme de cloche. C'est le modèle de ML qui devra s'adapter à ces données. 
+
+
+A voir : ajouter du multi processing pour plus d'efficacité des simulations
+
 ## Documentation : 
 Voici les ressources que j'ai utilisé pour mon apprentissage :
 - https://www.datacamp.com/fr/tutorial/linear-regression-in-python?dc_referrer=https%3A%2F%2Fwww.google.com%2F (sans doute nul)

@@ -24,7 +24,7 @@ def toggle_one_simulation(one_simulation, switch_one, switch_several):
     switch_several.set_value(not one_simulation[0])
     switch_one.set_value(one_simulation[0])
 
-
+pygame.init()
 
 my_theme = pygame_menu.themes.THEME_DARK.copy()
 my_theme.background_color = (25, 27, 30)       
@@ -43,92 +43,23 @@ my_theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_UNDERLINE_TITLE
 my_theme.widget_cursor = pygame_menu.locals.CURSOR_HAND 
 my_theme.widget_margin = (0, 15)                       
 
-def main_mode_choice():
-    pygame.init()
-    one_simulation = [True]
-    
-    
-    mode_choice_screen = pygame.display.set_mode((800, 600))
-    mode_choice_menu = pygame_menu.Menu(
-                width=800,
-                height=600,
-                title="Mode choice",
-                theme=my_theme
-            )
-    
-    
-    
-    mode_choice_menu.add.label("Veuillez choisir votre mode\n")
-    mode_choice_menu.add.label("\nSimulation simple")
-    switch_one = mode_choice_menu.add.toggle_switch(
-            title="Faire une seule simulation",
-            default=one_simulation[0],
-            onchange=lambda value: toggle_one_simulation(one_simulation, switch_one, switch_several),
-            width=60
-        )
-    
-    mode_choice_menu.add.label("\nseveral simulations ")
-    switch_several =  mode_choice_menu.add.toggle_switch(
-            title="Faire plusieurs simulations ",
-            default= not one_simulation[0],
-            onchange=lambda value: toggle_one_simulation(one_simulation, switch_one, switch_several),
-            width=60
-        )
 
 
-    mode_choice_menu.add.button("\nValider", lambda: valider(running_mode_choice))
-    
-    
-    
-    running_mode_choice = [True]
-    while running_mode_choice[0]:
-        mode_choice_screen.fill((0,0,0))
-        events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-                running_mode_choice = False
-        mode_choice_menu.update(events)
-        mode_choice_menu.draw(mode_choice_screen)
-        pygame.display.flip()
-    
-    if one_simulation[0]:
-        print("main")
-        main()
-    else : 
-        print("not main")
-        several_simulations()
+def several_simulations():  
+    nb_sim = int(input("Entrez le nombre de simulations (améliorer la précision des données) : "))
+    print(f"Vous avec choisi {nb_sim} simulations")
+    nb_minos = int(input("Entrez le nombre de Minos pour chaque simulation : "))
+    print(f"Vous avec choisi {nb_minos} Minos")
+    ratio_food = float(input("Entrez le ratio de nourriture (format float : nb_food/nb_minos) : "))
+    print(f"Vous avec choisi {ratio_food} comme ratio")
 
 
-def several_simulations():
-    state_menu = [True] 
-    infos = [1,3,1,10,1,1] #mino min, minos max, minos pas, food min, food max, pas
-    screen = pygame.display.set_mode((2000, 1000))
-    config = simulationconfig.SimulationConfig(2000, 1000, screen, state_menu, None)
-    config.init_several_simulation(infos)
-    
-
-
-    while state_menu[0]:
-        events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-                state_menu[0] = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_KP_ENTER:
-                    config.start()
-            
-        config.menu_update(events)
-    print(infos)
     big_data = []
-    for nb_minos in range(infos[0],infos[1],infos[2]): 
-        for ratio in range(infos[4],infos[3],infos[5]):
-            res = main(nb_minos,1/ratio)
-            df_sim = res[0][["resistance", "vitesse", "satiete", "vision", "time_lived"]]
-            print(df_sim)
-            df_sim["nb_minos"] = nb_minos
-            df_sim["ratio_food"] = 1/ratio
-            big_data.append(df_sim)
-            print(f"simulation avec {nb_minos} minos et 1/{ratio} ratio. time : {res[0]["time_lived"].max()}")
+    for i in range(nb_sim) :
+        res = main(nb_minos,ratio_food)
+        df_sim = res[0][["resistance", "vitesse", "satiete", "vision", "time_lived"]].copy()
+        big_data.append(df_sim)
+        print(f"simulation numéro {i} finie. time : {res[0]["time_lived"].max()}")
 
 
     final_big_df = pd.concat(big_data)
@@ -184,6 +115,7 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         engine = simulationengine.Engine(WIDTH, HEIGHT, config.ratio_food, running, d, False, screen, manager)
         
         engine.init_grid()
+        engine.use_abundance_zone = config.abundance_zone
         engine.init_abundance_zone()
         
         engine.init_gui(f"FPS : 0/{config.fps}")
@@ -283,6 +215,7 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         
         engine.init_minos(config.nb_minos,config.resistance_mu, config.resistance_sigma, config.vitesse_mu, config.vitesse_sigma, config.satiete_mu, config.satiete_sigma, config.vision_mu, config.vision_sigma, config.print_vision)
         engine.init_food_list()
+        engine.init_abundance_zone()
         engine.ratio_food = ratio_food
 
 
@@ -298,4 +231,4 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         df_minos = pd.DataFrame(engine.minos_list_id, columns=["id", "resistance", "vitesse", "satiete", "vision", "time_lived", "food_eaten", "distance_traveled"])
         return (df_minos, engine.food_data)
 
-main_mode_choice()
+main()

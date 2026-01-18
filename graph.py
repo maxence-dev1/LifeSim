@@ -160,19 +160,19 @@ class GraphStatistics:
                 new_colors[idx] = col
                 ax_radio.collections[0].set_facecolors(new_colors)
 
-            self.graph_ax.scatter(self.global_time_lived, data, color=col, alpha=0.6, s=30, edgecolors='none')
+            self.graph_ax.scatter( data,self.global_time_lived, color=col, alpha=0.6, s=30, edgecolors='none')
 
             if len(self.global_time_lived) > 1:
                 try:
-                    z = np.polyfit(self.global_time_lived, data, 1)
+                    z = np.polyfit(data, self.global_time_lived, 1)
                     p = np.poly1d(z)
-                    self.graph_ax.plot(self.global_time_lived, p(self.global_time_lived), "w--", alpha=0.5, linewidth=1, label="Tendance")
+                    self.graph_ax.plot(data, p(data), "w--", alpha=0.5, linewidth=1, label="Tendance")
                 except:
                     pass
 
             self.graph_ax.set_title(f"Corrélation : Survie vs {label}", fontsize=14, fontweight='bold', pad=15)
-            self.graph_ax.set_xlabel("Temps vécu (Frames)", fontsize=11)
-            self.graph_ax.set_ylabel(f"Valeur : {label}", fontsize=11)
+            self.graph_ax.set_xlabel(f"Valeur : {label}", fontsize=11)
+            self.graph_ax.set_ylabel("Temps vécu (Frames)", fontsize=11)
             self.graph_ax.legend(loc='lower right', frameon=False)
             self.clean_axes(self.graph_ax)
             plt.draw()
