@@ -563,14 +563,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/moteur/" class="md-nav__link">
+      <a href="../../Architecture/affichage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    moteur
+    Affichage
   
 
     
@@ -730,10 +730,12 @@
 <h2 id="systeme-dapparition">Système d'apparition:</h2>
 <ul>
 <li><strong>rareté</strong> : le nombre de nourriture est définit sous forme de ratio par l'utilisateur. X nourritures pour Y Minos.</li>
-<li><strong>Cycle de régénération</strong> : </li>
+<li><strong>Cycle de régénération</strong> : <ul>
 <li>Si quantité_actuelle &lt; Ratio : de la nourriture apparait aléatoirement pour combler le manque</li>
 <li>Si quantité_actuelle &gt;= Ratio : Aucune apparition, si la nourriture est mangée, elle n'est pas remplacée</li>
-<li><strong>Localisation</strong> : Une nourriture peut apparaitre soit dans la <strong>zone d'abondance</strong> (si activée), soit n'importe ou ailleur sur la carte.</li>
+</ul>
+</li>
+<li><strong>Localisation</strong> : Une nourriture peut apparaitre soit dans la <strong>zone d'abondance</strong> (si activée), soit n'importe où ailleur sur la carte.</li>
 <li><strong>Destruction</strong> : Lorsqu'une nourriture est mangée, elle est instantanément détruite et n'est plus disponible pour les autres Minos</li>
 </ul>
 <p><strong>Variantes et propriété</strong></p>

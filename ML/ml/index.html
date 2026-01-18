@@ -507,14 +507,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/moteur/" class="md-nav__link">
+      <a href="../../Architecture/affichage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    moteur
+    Affichage
   
 
     
@@ -578,6 +578,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -594,6 +612,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation :
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-daction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan d'action :
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plan d'action :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparation-et-normalisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Préparation et normalisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-de-cours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes de "cours"
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -646,6 +733,64 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation :
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-daction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan d'action :
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plan d'action :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparation-et-normalisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Préparation et normalisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-de-cours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes de "cours"
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -662,10 +807,21 @@
 
 
 <h1 id="machine-learning">Machine Learning</h1>
-<p>Ici vous trouverez l'implémentation d'un modèle de Machine Learning capable de sélectionner un Minos qui aura le plus de chance de survivre avec uniquement son code génétique et l'environnement. </p>
-<p>La création d'un modèle de Machine Learning est en cours de création...</p>
-<p>Voulant maitriser les technologies que j'utilise dans ce projet, j'ai choisi de créer mon modèle 'from scratch' (de 0). </p>
-<p>Vous trouverez ici l'avancée de mes recherches et de mon apprentissage.</p>
+<p>Ici, vous trouverez un "journal de bord" des principales étapes de la création de mon modèle de Machin Learning. (Cette page me servirat de memento aussi).</p>
+<h2 id="documentation">Documentation :</h2>
+<p>Voici les ressources que j'ai utilisé pour mon apprentissage :
+- https://www.datacamp.com/fr/tutorial/linear-regression-in-python?dc_referrer=https%3A%2F%2Fwww.google.com%2F (sans doute nul)
+- https://www.youtube.com/watch?v=CCzGRyO2CTc</p>
+<h2 id="plan-daction">Plan d'action :</h2>
+<p>Après des recherches, j'ai trouvé que le modèle de ML qui conviendrait à mon projet et pas trop difficile à prendre en main est le modèle de regression linéaire multiple. Ici, pas de réseaux de neurones difficile, on commence par les bases. </p>
+<h3 id="1-preparation-et-normalisation">1. Préparation et normalisation</h3>
+<ul>
+<li>[ ] Ne garder que les colonnes interessantes (resistance, vitesse, satiété, vision, nb_minos, ratio_food) (X) et time_lived (Y)</li>
+<li>[ ] garder dans un fichier config.json toutes les données de la config par défaut des simulations multiples</li>
+<li>[ ] Standardisation : z = (x-mu)/sigma (écart par rapport à la moyenne au lieu de entre 0 et 1)</li>
+<li>[ ] Mélanger les données et garder 20% pour tester et 80% pour entrainer</li>
+</ul>
+<h2 id="notes-de-cours">Notes de "cours"</h2>
 
 
 

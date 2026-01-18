@@ -6,7 +6,7 @@
       
       
       
-        <link rel="prev" href="../../Architecture/moteur/">
+        <link rel="prev" href="../../Architecture/affichage/">
       
       
         <link rel="next" href="../../ML/ml/">
@@ -507,14 +507,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/moteur/" class="md-nav__link">
+      <a href="../../Architecture/affichage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    moteur
+    Affichage
   
 
     
@@ -602,15 +602,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mide-simulation-simple" class="md-nav__link">
+  <a href="#mode-simulation-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mide simulation simple :
+        Mode simulation simple :
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Mide simulation simple :">
+    <nav class="md-nav" aria-label="Mode simulation simple :">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -768,15 +768,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mide-simulation-simple" class="md-nav__link">
+  <a href="#mode-simulation-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mide simulation simple :
+        Mode simulation simple :
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Mide simulation simple :">
+    <nav class="md-nav" aria-label="Mode simulation simple :">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -864,7 +864,7 @@
 
 <h1 id="analyse-et-statistiques">Analyse et statistiques</h1>
 <p>Le projet LifeSim intègre un système de récolte de données, conçu pour le moment pour l'analyse scientifique de la survie et l'entrainement de modèles de Machine Learning.</p>
-<h2 id="mide-simulation-simple">Mide simulation simple :</h2>
+<h2 id="mode-simulation-simple">Mode simulation simple :</h2>
 <p>En mode unique, la priorité est la visualisation immédiate des données. </p>
 <h3 id="collecte-des-donnees">Collecte des données</h3>
 <p>Pendant que la simulation tourne, les données sont accumulées en mémoire puis structurées via <strong>Pandas</strong> et <strong>Numpy</strong>.</p>
@@ -900,7 +900,7 @@
 </tbody>
 </table>
 <h3 id="rendu-visuel">Rendu visuel</h3>
-<p>A la fermeture de la fenetre, le système génère automatiquement des graphiques 
+<p>A la fermeture de la fenêtre, le système génère automatiquement des graphiques 
 Voici quelques exemples : </p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../distrib_satiete.png" data-desc-position="bottom"><img alt="Photo 1" src="../distrib_satiete.png"></a>
 <em>Distribution de la satiété sur 5000 Minos</em></p>
@@ -911,9 +911,9 @@ Voici quelques exemples : </p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../best.png" data-desc-position="bottom"><img alt="Photo 1" src="../best.png"></a>
 <em>Profil du Minos qui a survécu le plus longtemps</em></p>
 <h2 id="mode-simulation-multiples">Mode simulation multiples :</h2>
-<p>En mode multiple, le but est de génerer des Datasets massifs. Chaque simulation vient nourrit une base de donnée globale au format CSV.</p>
+<p>En mode multiple, le but est de génerer des Datasets massifs. Chaque simulation vient nourrire une base de données globale au format CSV.</p>
 <h3 id="structure-du-fichier-csv">Structure du fichier CSV</h3>
-<p>Chaque ligne réprésente toutes les information d'un Minos.</p>
+<p>Chaque ligne réprésente toutes les informations d'un Minos.</p>
 <table>
 <thead>
 <tr>
@@ -973,7 +973,7 @@ Voici quelques exemples : </p>
 <p>Ces lignes de données isolent chaque individu dans son contexte (nombre de concurrents, abondance de nourriture), offrant une vision complète et détaillée de la sélection naturelle simulée.</p>
 </div>
 <h3 id="potentiel-pour-machine-learning">Potentiel pour Machine Learning</h3>
-<p>Ces lignes permettent d'isoler chaque Minos et de comprendre dans quel cas il survit bien. Ces données sont idéales pour des algorithme de Machin Learning </p>
+<p>Ces lignes permettent d'isoler chaque Minos et de comprendre dans quel cas il survit bien. Ces données sont idéales pour des algorithmes de Machin Learning </p>
 
 
 

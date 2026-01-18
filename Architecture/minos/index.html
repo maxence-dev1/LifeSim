@@ -574,14 +574,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../moteur/" class="md-nav__link">
+      <a href="../affichage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    moteur
+    Affichage
   
 
     
@@ -813,7 +813,7 @@
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>food_list</code></td>
-<td style="text-align: left;">Liste de toutes les nourritures sur la carte (utilisé rarement si il ne trouve pas de nourriture dans  <code>food_list_to_see_before</code>)</td>
+<td style="text-align: left;">Liste de toutes les nourritures sur la carte (utilisé rarement s'il ne trouve pas de nourriture dans  <code>food_list_to_see_before</code>)</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
@@ -838,15 +838,15 @@
 </tbody>
 </table>
 <h2 id="fonctionnement">Fonctionnement</h2>
-<p>Un Minos fonctionne grâce à une fonction principale <code>update</code> où <code>update_speed</code> pour la version sans interface.</p>
+<p>Un Minos fonctionne grâce à une fonction principale <code>update</code> ou <code>update_speed</code> pour la version sans interface.</p>
 <p>Ces fonctions sont séparées en 2 : </p>
 <ul>
 <li>Si le Minos est en vie : <ul>
-<li>Actualise le nombe de frame(<code>time_lived</code>), la liste de nourriture (<code>food_list</code>) et la liste de nourriture à portée (<code>food_list_to_see_before</code>)</li>
+<li>Actualise le nombre de frame(<code>time_lived</code>), la liste de nourritures (<code>food_list</code>) et la liste de nourritures à proximité (<code>food_list_to_see_before</code>)</li>
 <li>Vérifie le mode de sprint</li>
 <li>Déplace le Minos</li>
 <li>Actualise la jauge de faim</li>
-<li>Vérifie si il mange </li>
+<li>Vérifie s'il mange </li>
 </ul>
 </li>
 <li>Sinon  : <ul>
@@ -854,8 +854,8 @@
 </ul>
 </li>
 </ul>
-<p>Voici comment un Minos gère ses destination et ses déplacements. (Petite appartée ici, je rappelle que ces fonctions sont entièrement réfléchie et programmées par moi. Ce n'est donc sans doute pas la meilleur manière de le faire mais cela m'a fait m'exercer). </p>
-<p>La méthode <code>find_destination</code> est appelée toute les 10 frames ou lorsqu'un Minos a atteind sa destination. On vérifie d'abord si il n'y a pas de nourriture dans le voisinnage, si non, on regarde toute les nourritures de la carte. Cela se fait grâce à la méthode <code>get_closer_food</code> : </p>
+<p>Voici comment un Minos gère ses destinations et ses déplacements. 
+La méthode <code>find_destination</code> est appelée toute les 10 frames ou lorsqu'un Minos a atteint sa destination. Il vérifie d'abord s'il n'y a pas de nourriture dans le voisinage, si non, il regarde toute les nourritures de la carte. Cela se fait grâce à la méthode <code>get_closer_food</code> : </p>
 <div class="language-python highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_closer_food</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_to_search</span><span class="p">):</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="n">dist_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span> <span class="c1">#(1)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n">x_to_go</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(2)</span>
@@ -891,15 +891,15 @@
 <li>Il regarde que quand il a 20% de sa vie, sinon il se concentre sur celles autours de lui</li>
 <li>Si il voit une nourriture dans une zone d'abondance, il abandonne les recherche et s'y dirige</li>
 <li>Calcul sans racine carré car moins gourmand</li>
-<li>Convention : on retourne cela si il n'a pas trouvé de destination</li>
+<li>Convention : on retourne cela s'il n'a pas trouvé de destination</li>
 <li>On retourne les valeurs trouvées et la vraie distance</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Optimisation des recherches</p>
-<p>Afin d'optimiser les recherches de nourriture qui peuvent être couteuse lorsqu'il y en a beaucoup, la distance est calculée uniquement à la fin car l'opération racine carré est plutot gourmande. Aussi, le Minos se comparera uniquement aux nourritures proches de lui et à celle de la zone de densité. </p>
+<p>Afin d'optimiser les recherches de nourriture qui peuvent être couteuses lorsqu'il y en a beaucoup, la distance est calculée uniquement à la fin car l'opération racine carré est plutôt gourmande. Aussi, le Minos se comparera uniquement aux nourritures proches de lui et à celles de la zone de densité. </p>
 </div>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../illustration_recherche_nourriture.png" data-desc-position="bottom"><img alt="Capture d'écran de la simulation" src="../illustration_recherche_nourriture.png"></a>
-<em>Visualisation en rose des nourritures qui sont prise en compte par le Minos</em></p>
+<em>Visualisation en rose des nourritures qui sont prises en compte par le Minos</em></p>
 
 
 

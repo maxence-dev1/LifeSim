@@ -399,10 +399,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mort-lorsque-la-jauge-de-nourriture-atteind-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre" class="md-nav__link">
+  <a href="#mort-lorsque-la-jauge-de-nourriture-atteint-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mort : Lorsque la jauge de nourriture atteind 0, le Minos meurt. Il devient noir avant de disparaitre.
+        Mort : Lorsque la jauge de nourriture atteint 0, le Minos meurt. Il devient noir avant de disparaitre.
       
     </span>
   </a>
@@ -635,14 +635,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Architecture/moteur/" class="md-nav__link">
+      <a href="../../Architecture/affichage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    moteur
+    Affichage
   
 
     
@@ -825,10 +825,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mort-lorsque-la-jauge-de-nourriture-atteind-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre" class="md-nav__link">
+  <a href="#mort-lorsque-la-jauge-de-nourriture-atteint-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mort : Lorsque la jauge de nourriture atteind 0, le Minos meurt. Il devient noir avant de disparaitre.
+        Mort : Lorsque la jauge de nourriture atteint 0, le Minos meurt. Il devient noir avant de disparaitre.
       
     </span>
   </a>
@@ -904,17 +904,17 @@
 </tr>
 </tbody>
 </table>
-<p>Comme dans la vraie vie, chaque attribut à un <strong>coût</strong> qui est ici représenté par une dépense d'énergie plus importante</p>
+<p>Comme dans la vraie vie, chaque attribut à un <strong>cout</strong> qui est ici représenté par une dépense d'énergie plus importante</p>
 <h2 id="cycle-de-vie">Cycle de vie</h2>
 <h3 id="naissance-le-minos-apparait-aleatoirement-sur-la-carte"><strong>Naissance</strong> :  le Minos apparait aléatoirement sur la carte</h3>
 <ul>
-<li><strong>Jauge initiale</strong> : 100 unités + 25% de sa capacité max</li>
-<li><strong>Génétique</strong> : Les attributs sont tirés au sort (Loi Normale), créant une population variée avec des individus moyen et quelques exeptions. </li>
+<li><strong>Jauge initiale</strong> : 100 unités + 25% de sa capacité maximale</li>
+<li><strong>Génétique</strong> : Les attributs sont tirés au sort (Loi Normale), créant une population variée avec des individus moyens et quelques exceptions. </li>
 </ul>
 <h3 id="vie-et-comportement-a-chaque-instant-le-minos-analyse-son-environnement"><strong>Vie et comportement</strong> : à chaque instant, le Minos analyse son environnement</h3>
 <ol>
 <li><strong>Zone d'abondance</strong> : S'il en détecte une, il s'y dirige immédiatement oubliant les autres nourritures</li>
-<li><strong>Recherche active</strong> : Sinon, il choisi la nourriture la plus proche</li>
+<li><strong>Recherche active</strong> : Sinon, il choisit la nourriture la plus proche</li>
 <li><strong>Errance</strong> : si aucune nourriture n'est visible, il se dirige vers un point aléatoire. Cela augmentera sa consommation</li>
 </ol>
 <div class="admonition info">
@@ -925,13 +925,13 @@
 <h3 id="mode-urgence-sprint-si-la-jauge-de-nourriture-descend-en-dessous-des-50-et-quune-nourriture-est-visible"><strong>Mode urgence (sprint)</strong> : si la jauge de nourriture descend en dessous des 50% et qu'une nourriture est visible :</h3>
 <ul>
 <li>La bordure du Minos devient jaune</li>
-<li>Sa vitese est doublé</li>
+<li>Sa vitesse est doublée</li>
 <li>Sa consommation d'énergie augmente drastiquement</li>
 </ul>
-<h3 id="mort-lorsque-la-jauge-de-nourriture-atteind-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre"><strong>Mort</strong> : Lorsque la jauge de nourriture atteind 0, le Minos meurt. Il devient noir avant de disparaitre.</h3>
+<h3 id="mort-lorsque-la-jauge-de-nourriture-atteint-0-le-minos-meurt-il-devient-noir-avant-de-disparaitre"><strong>Mort</strong> : Lorsque la jauge de nourriture atteint 0, le Minos meurt. Il devient noir avant de disparaitre.</h3>
 <div class="admonition info">
 <p class="admonition-title">Modèle de consommation énergétique</p>
-<p>La consommation d'un Minos est calculé à chaque frame. Ce modèle garantit un équilibre entre les capacités physique et la survie.</p>
+<p>La consommation d'un Minos est calculée à chaque frame. Ce modèle garantit un équilibre entre les capacités physiques et la survie.</p>
 <p><strong>Formule :</strong></p>
 <div class="arithmatex">\[C = 0.5 + (R_{esistance} \times 0.1) + (V_{ision} \times 0.001) + (V_{itesse}^{1.3} \times R \times 0.005) + M\]</div>
 <p><strong>Détails des variables :</strong>
@@ -940,7 +940,7 @@
 <h3 id="indicateurs-visuels">Indicateurs Visuels :</h3>
 <ul>
 <li><strong>Couleur du corps</strong> : Varie du <strong>vert</strong> (rassasié) au <strong>rouge</strong> (Affamé)</li>
-<li><strong>Contour</strong> :  Passe au <strong>jaune</strong> lorsque le Minos sprint</li>
+<li><strong>Contour</strong> :  Passe au <strong>jaune</strong> lorsque le Minos sprinte</li>
 <li><strong>Corps noir</strong> : Minos mort</li>
 </ul>
 <p>Vous trouverez plus d'informations techniques dans la partie <a href="../../Architecture/minos/">Architecture des Minos</a></p>
