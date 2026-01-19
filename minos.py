@@ -106,14 +106,14 @@ class Mino:
                     
                     if self.jauge_faim + 30*self.satiete <= self.resistance*150:
                         # print("+ ", 25 + 15*self.satiete)
-                        self.jauge_faim += f.valeur + 15*self.satiete
+                        self.jauge_faim += f.valeur + 25*self.satiete
                     f.to_destroy = True
 
 
     def update_jauge_faim(self):
         """Actualise la jauge de faim"""
-        cout_base = self.consommation_fixe +(self.resistance*0.1)+(self.vision*0.001)
-        cout_effort = self.vitesse**1.7*self.resistance*0.001
+        cout_base = self.consommation_fixe +(self.resistance*0.05)
+        cout_effort = self.vitesse**1.2*self.resistance*0.0005
         
         malus_recherche = 1.5 if not self.destination_food else 0 
         self.jauge_faim -= (cout_base + cout_effort + malus_recherche)
