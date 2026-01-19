@@ -9,10 +9,10 @@ import ctypes
 import os
 
 
-try:
-    ctypes.windll.shcore.SetProcessDpiAwareness(1)
-except Exception:
-    ctypes.windll.user32.SetProcessDPIAware()
+# try:
+#     ctypes.windll.shcore.SetProcessDpiAwareness(1)
+# except Exception:
+#     ctypes.windll.user32.SetProcessDPIAware()
 
 
 

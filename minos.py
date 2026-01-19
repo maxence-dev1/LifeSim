@@ -85,12 +85,12 @@ class Mino:
             self.is_on_food()
 
     def verif_sprint_mode(self):
-        if (not self.sprint and self.jauge_faim <= self.max_jauge_faim*0.5 and self.destination_food is not None):
+        if (not self.sprint and self.jauge_faim <= self.max_jauge_faim*0.3 and self.destination_food is not None):
             self.border_color = (255,255,0)
             self.sprint = True
             self.vitesse *= 2
 
-        elif (self.sprint and self.jauge_faim > self.max_jauge_faim*0.5 and self.destination_food is None):
+        elif (self.sprint and self.jauge_faim > self.max_jauge_faim*0.3 and self.destination_food is None):
             self.border_color = (self.color[0] * 0.5, self.color[1] * 0.5, self.color[2] * 0.5)
             self.sprint = False
             self.vitesse /= 2
@@ -113,8 +113,9 @@ class Mino:
     def update_jauge_faim(self):
         """Actualise la jauge de faim"""
         cout_base = self.consommation_fixe +(self.resistance*0.1)+(self.vision*0.001)
-        cout_effort = self.vitesse**1.95*self.resistance*0.002
-        malus_recherche = 0.5 if not self.destination_food else 0 
+        cout_effort = self.vitesse**1.7*self.resistance*0.001
+        
+        malus_recherche = 1.5 if not self.destination_food else 0 
         self.jauge_faim -= (cout_base + cout_effort + malus_recherche)
         #Le bonus de départ
         if self.jauge_faim <self.max_jauge_faim and not self.start_bonus_used :
