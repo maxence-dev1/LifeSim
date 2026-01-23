@@ -95,10 +95,10 @@ class Engine():
                 m = minos.Mino(i,size, 0,self.width, 0, self.height, self.food_list, resistance_mu, resistance_sigma, vitesse_mu, vitesse_sigma, satiete_mu, satiete_sigma, vision_mu, vision_sigma)
                 m.draw_vision = print_vision
                 self.minos_list_id[i,0] = i
-                self.minos_list_id[i,1] = m.resistance
-                self.minos_list_id[i,2] = m.vitesse
-                self.minos_list_id[i,3] = m.satiete
-                self.minos_list_id[i,4] = m.vision
+                self.minos_list_id[i,1] = round((m.resistance - resistance_mu)/resistance_sigma,3)
+                self.minos_list_id[i,2] = round((m.vitesse - vitesse_mu)/vitesse_sigma, 3)
+                self.minos_list_id[i,3] = round((m.satiete - satiete_mu)/satiete_sigma, 3)
+                self.minos_list_id[i,4] = round((m.vision - vision_mu)/vision_sigma, 3)
                 self.minos_list_id[i,5] = 0
                 self.minos_list_id[i,5] = 0
                 self.minos_list_id[i,5] = 0
@@ -136,7 +136,6 @@ class Engine():
                 cellule_liste.clear()
         self.food_list = [f for f in self.food_list if not f.to_destroy]
         i=0
-        print(self.use_abundance_zone)
         if self.use_abundance_zone:
 
             while (len(self.food_list)<self.nb_food):

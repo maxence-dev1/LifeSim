@@ -24,29 +24,29 @@ class SimulationConfig:
         self.width = width
         self.height = height
         
-        
-        self.my_theme = pygame_menu.themes.THEME_DARK.copy()
-        self.my_theme.background_color = (25, 27, 30)       
-        self.my_theme.title_background_color = (35, 38, 42) 
-        self.my_theme.title_font_color = (220, 220, 220)    
-        self.my_theme.widget_font_color = (180, 180, 180)   
-        self.my_theme.selection_color = (70, 130, 180)      
+        if screen is not None:
+            self.my_theme = pygame_menu.themes.THEME_DARK.copy()
+            self.my_theme.background_color = (25, 27, 30)       
+            self.my_theme.title_background_color = (35, 38, 42) 
+            self.my_theme.title_font_color = (220, 220, 220)    
+            self.my_theme.widget_font_color = (180, 180, 180)   
+            self.my_theme.selection_color = (70, 130, 180)      
 
-        self.my_theme.title_font = pygame_menu.font.FONT_BEBAS  
-        self.my_theme.widget_font = pygame_menu.font.FONT_OPEN_SANS
-        self.my_theme.widget_font_size = 22
-        self.my_theme.title_font_size = 35
-        self.my_theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_UNDERLINE_TITLE
+            self.my_theme.title_font = pygame_menu.font.FONT_BEBAS  
+            self.my_theme.widget_font = pygame_menu.font.FONT_OPEN_SANS
+            self.my_theme.widget_font_size = 22
+            self.my_theme.title_font_size = 35
+            self.my_theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_UNDERLINE_TITLE
 
 
-        self.my_theme.widget_cursor = pygame_menu.locals.CURSOR_HAND 
-        self.my_theme.widget_margin = (0, 15)      
+            self.my_theme.widget_cursor = pygame_menu.locals.CURSOR_HAND 
+            self.my_theme.widget_margin = (0, 15)      
 
-        self.menu = pygame_menu.Menu(
-            width=width,
-            height=height,
-            title="Menu Principal",
-            theme=self.my_theme)
+            self.menu = pygame_menu.Menu(
+                width=width,
+                height=height,
+                title="Menu Principal",
+                theme=self.my_theme)
 
 
     def start(self):

@@ -1,12 +1,11 @@
-import pygame, sys, draw, minos, time, random, food, pygame_menu, graph, pygame_gui, numpy, simulationconfig, simulationengine
+import pygame, sys, draw, pygame_menu, graph, pygame_gui, simulationconfig, simulationengine
 import pandas as pd
 #5000 minos avec 0 food avant opti : afficher->1.13 sans afficher -> 9 sec
 #1000 minos avec 500 food avant opti : afficher->4.07 sans afficher -> 2.46 min (variable car la simulation n'a jamais 0 food dépend donc des attributs des minos)
 
 #5000 minos avec 0 food apres opti : afficher->1.28 sans afficher -> 25 sec
 #1000 minos avec 500 food apres opti : afficher->1.32 sans afficher -> 37 sec
-import ctypes
-import os
+import modele_ml
 
 
 # try:
@@ -64,6 +63,7 @@ def several_simulations():
 
     final_big_df = pd.concat(big_data)
     final_big_df.to_csv("data.csv",header= True, index=False)
+    modele_ml.main()
 
 
 
@@ -231,4 +231,4 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         df_minos = pd.DataFrame(engine.minos_list_id, columns=["id", "resistance", "vitesse", "satiete", "vision", "time_lived", "food_eaten", "distance_traveled"])
         return (df_minos, engine.food_data)
 
-main()
+several_simulations()
