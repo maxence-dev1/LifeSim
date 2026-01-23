@@ -42,20 +42,51 @@ my_theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_UNDERLINE_TITLE
 my_theme.widget_cursor = pygame_menu.locals.CURSOR_HAND 
 my_theme.widget_margin = (0, 15)                       
 
-
+def get_input(prompt, cast_type, default=None):
+    if default is not None:
+        prompt += f" [{default}]"
+    user_input = input(f"{prompt} : ").strip()
+    
+    if not user_input and default is not None:
+        return default
+    try:
+        return cast_type(user_input)
+    except ValueError:
+        print(f"Erreur : Veuillez entrer un {cast_type.__name__} valide.")
+        return get_input(prompt, cast_type, default)
 
 def several_simulations():  
-    nb_sim = int(input("Entrez le nombre de simulations (améliorer la précision des données) : "))
-    print(f"Vous avec choisi {nb_sim} simulations")
-    nb_minos = int(input("Entrez le nombre de Minos pour chaque simulation : "))
-    print(f"Vous avec choisi {nb_minos} Minos")
-    ratio_food = float(input("Entrez le ratio de nourriture (format float : nb_food/nb_minos) : "))
-    print(f"Vous avec choisi {ratio_food} comme ratio")
+    print("--- CONFIGURATION DE LA SIMULATION ---")
+
+    choice = input("Mode : [E]asy ou [A]dvanced ? ").lower()
+    mode_easy = (choice != 'a')
+
+    nb_sim = get_input("Nombre de simulations", int, 10)
+    nb_minos = get_input("Nombre de Minos par simulation", int, 50)
+    ratio_food = get_input("Ratio de nourriture (ex: 0.5)", float, 0.5)
+
+    if not mode_easy:
+        print("\n--- PARAMÈTRES AVANCÉS (LOI NORMALE) ---")
+        resistance_mu    = get_input("  Resistance (μ)", float, 2.5)
+        resistance_sigma = get_input("  Resistance (σ)", float, 1.2)
+        vitesse_mu       = get_input("  Vitesse (μ)", float, 5.5)
+        vitesse_sigma    = get_input("  Vitesse (σ)", float, 2.5)
+        satiete_mu       = get_input("  Satiété (μ)", float, 1.5)
+        satiete_sigma    = get_input("  Satiété (σ)", float, 0.6)
+        vision_mu        = get_input("  Vision (μ)", float, 250)
+        vision_sigma     = get_input("  Vision (σ)", float, 120)
+    else:
+        resistance_mu, resistance_sigma = 2.5, 1.2
+        vitesse_mu, vitesse_sigma = 5.5, 2.5
+        satiete_mu, satiete_sigma = 1.5, 0.6
+        vision_mu, vision_sigma = 250, 120
+
+    print("\n Configuration terminée. Lancement de la simulation...")
 
 
     big_data = []
     for i in range(nb_sim) :
-        res = main(nb_minos,ratio_food)
+        res = main(nb_minos,ratio_food, resistance_mu=resistance_mu, resistance_sigma=resistance_sigma, vitesse_mu=vitesse_mu, vitesse_sigma=vitesse_sigma, satiete_mu=satiete_mu, satiete_sigma=satiete_sigma, vision_mu=vision_mu, vision_sigma=vision_sigma)
         df_sim = res[0][["resistance", "vitesse", "satiete", "vision", "time_lived"]].copy()
         big_data.append(df_sim)
         print(f"simulation numéro {i} finie. time : {res[0]["time_lived"].max()}")
@@ -67,7 +98,7 @@ def several_simulations():
 
 
 
-def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
+def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000, resistance_mu = None, resistance_sigma = None, vitesse_mu = None, vitesse_sigma = None, satiete_mu = None, satiete_sigma = None, vision_mu = None, vision_sigma = None):
     pygame.init()
     fps_list = []
     if nb_minos is None:
@@ -213,7 +244,12 @@ def main(nb_minos = None, ratio_food = None, width = 2000, height = 1000):
         engine = simulationengine.Engine(width, height, config.ratio_food, running, None, True)
         engine.init_grid()
         
-        engine.init_minos(config.nb_minos,config.resistance_mu, config.resistance_sigma, config.vitesse_mu, config.vitesse_sigma, config.satiete_mu, config.satiete_sigma, config.vision_mu, config.vision_sigma, config.print_vision)
+        if resistance_mu == None:
+            engine.init_minos(config.nb_minos,config.resistance_mu, config.resistance_sigma, config.vitesse_mu, config.vitesse_sigma, config.satiete_mu, config.satiete_sigma, config.vision_mu, config.vision_sigma, config.print_vision)
+        else : 
+            engine.init_minos(config.nb_minos,resistance_mu, resistance_sigma, vitesse_mu, vitesse_sigma, satiete_mu, satiete_sigma, vision_mu, vision_sigma, config.print_vision)
+
+
         engine.init_food_list()
         engine.init_abundance_zone()
         engine.ratio_food = ratio_food
