@@ -3,23 +3,23 @@ Les **Minos** sont le coeur de la simulation. Vous trouverez ici les détails te
 Un Minos est une entité à la fois simple et complexe qui suit des règles précises. Ces entités sont implémentées avec la classe `Mino` et gérées avec l'`Engine`.
 
 ### Paramètre principaux de la classe Mino :
-| Catégorie                     | Attribut                  | Description                                                                                                                        |
-| :---------------------------- | :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------- |
-| **Génétique**                 | `resistance`              | Résistance du Minos (max entre 0.1 et la loi normale passée en paramètre)                                                          |
-|                               | `vitesse`                 | Vitesse du Minos (max entre 0.2 et la loi normale passée en paramètre)                                                             |
-|                               | `vision`                  | Vision du Minos (max entre 0.1 et la loi normale passée en paramètre)                                                              |
-|                               | `satiete`                 | Satiété du Minos (max entre 30 et la loi normale passée en paramètre)                                                              |
-| **Etats du Minos**            | `jauge_faim`              | Jauge de faim du Minos                                                                                                             |
-|                               | `mort` / `to_clear`       | Etat du Minos                                                                                                                      |
-|                               | `sprint`                  | Etat de sprint                                                                                                                     |
-| **Navigation et percception** | `destination_food`        | Nourriture où aller                                                                                                                |
-|                               | `x` et `y`                | Coordonnées du Minos                                                                                                               |
-|                               | `draw_vision`             | Afficher le cercle de vision ou non                                                                                                |
+| Catégorie                     | Attribut                  | Description                                                                                                                       |
+| :---------------------------- | :------------------------ | :-------------------------------------------------------------------------------------------------------------------------------- |
+| **Génétique**                 | `resistance`              | Résistance du Minos (max entre 0.1 et la loi normale passée en paramètre)                                                         |
+|                               | `vitesse`                 | Vitesse du Minos (max entre 0.2 et la loi normale passée en paramètre)                                                            |
+|                               | `vision`                  | Vision du Minos (max entre 0.1 et la loi normale passée en paramètre)                                                             |
+|                               | `satiete`                 | Satiété du Minos (max entre 30 et la loi normale passée en paramètre)                                                             |
+| **Etats du Minos**            | `jauge_faim`              | Jauge de faim du Minos                                                                                                            |
+|                               | `mort` / `to_clear`       | Etat du Minos                                                                                                                     |
+|                               | `sprint`                  | Etat de sprint                                                                                                                    |
+| **Navigation et percception** | `destination_food`        | Nourriture où aller                                                                                                               |
+|                               | `x` et `y`                | Coordonnées du Minos                                                                                                              |
+|                               | `draw_vision`             | Afficher le cercle de vision ou non                                                                                               |
 |                               | `food_list`               | Liste de toutes les nourritures sur la carte (utilisé rarement s'il ne trouve pas de nourriture dans  `food_list_to_see_before `) |
-|                               | `food_list_to_see_before` | Liste de toutes les nourritures qui partagent les mêmes cases de la grille                                                         |
-| **Statistiques**              | `time_lived`              | Le temps total vécu                                                                                                                |
-|                               | `food_eaten`              | Le nombre de nourriture mangées                                                                                                    |
-|                               | `distance_traveled`       | Distance totale parcouru                                                                                                           |
+|                               | `food_list_to_see_before` | Liste de toutes les nourritures qui partagent les mêmes cases de la grille                                                        |
+| **Statistiques**              | `time_lived`              | Le temps total vécu                                                                                                               |
+|                               | `food_eaten`              | Le nombre de nourriture mangées                                                                                                   |
+|                               | `distance_traveled`       | Distance totale parcouru                                                                                                          |
 
 
 

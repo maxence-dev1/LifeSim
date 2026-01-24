@@ -4,15 +4,10 @@ Ici, vous trouverez un "journal de bord" des principales étapes de la création
 
 D'abord, j'ai créé une nouvelle branche sur GitHub intitulée "V3-ML". Cette branche aura moins d'interface et sera moins "user-friendly" que les autres versions. Cela se déroulera principalement dans la console où l'utilisateur aura le choix de comment remplir ses données. Il pourra choisir l'espérance et la variance de ses attributs. Il pourra aussi choisir le nombre de fois que toutes les simulations vont se répéter pour des données plus solides. Une fois cela fait, le modèle de ML lui dira quels sont les gènes les plus importants dans une simulation pauvre, une simulation équilibrée et une simulation riche (qui seront déjà définies). Le modèle sera capable de prédire sur ces données un échantillon de Minos qui sont susceptibles de survivre le plus longtemps. Enfin, l'utilisateur aura la possibilité de regarder X simulations où les Minos susceptibles de survivre auront un marquage.
 
-Ici, j'ai fait le choix discutable de « linéariser » artificiellement mes données. J'ai modifié les constantes de récompense et de coût afin que mes données soient plus linéaires et qu'il soit plus facile pour moi de créer mon premier modèle de ML.
-
-**À voir :** ajouter du multiprocessing pour plus d'efficacité des simulations
 
 ## Documentation
 
-Voici les ressources que j'ai utilisées pour mon apprentissage :
-
-- https://www.datacamp.com/fr/tutorial/linear-regression-in-python?dc_referrer=https%3A%2F%2Fwww.google.com%2F
+Pour cet apprentissage, j'ai utilisé les cours de François Husson, enseignant chercheur en statistiques. 
 - https://www.youtube.com/watch?v=CCzGRyO2CTc
 
 ## Plan d'action
@@ -21,12 +16,14 @@ Après des recherches, j'ai trouvé que le modèle de ML qui conviendrait à mon
 
 ### 1. Préparation et normalisation
 
-- [ ] Ne garder que les colonnes intéressantes (résistance, vitesse, satiété, vision, nb_minos, ratio_food) (X) et time_lived (Y)
-- [ ] Garder dans un fichier config.json toutes les données de la config par défaut des simulations multiples
-- [ ] Standardisation : $z = \frac{x - \mu}{\sigma}$ (écart par rapport à la moyenne au lieu de entre 0 et 1)
-- [ ] Mélanger les données et garder 20% pour tester et 80% pour entraîner
+A la différence des rendu visuels, ici on essaie d'utiliser uniquement les donnnées parlantes. Je garde donc uniquement le génome et le temps de survie des Minos. 
+Je me suis rendu compte que ces données n'étaient pas normalisées. J'ai donc décider de les borner entre 0 et 1 mais c'était difficile car je ne pouvais pas connaitre le maximum ni le minimum à chaque simulation. J'ai donc fais le choix de les normaliser selon un écart à la moyenne ($\mu$ que je connais) avec la formule $z = \frac{x - \mu}{\sigma}$
+
+
 
 ## Notes de cours
+
+Vous trouverez ici les notes que j'ai prise du cours de François Husson. Tout ce qui est écrit ici est compris et maitrisé.  
 
 Ici, l'objectif est d'expliquer quels gènes ont un rôle important et de prédire le temps de vie d'un Minos en fonction de ses gènes.
 
@@ -306,3 +303,53 @@ $$\mathcal{L}(T_{obs}) = \mathcal{T}_{\nu=n-p-1}$$
 $$|T_{obs}| > t_{n-p-1}(1 - \alpha/2) \Longrightarrow \text{rejet de } H_0 \text{ au seuil } \alpha$$
 
 ![alt text](test_coef_regression.png)
+
+
+
+
+# Création du modèle
+
+Etonnamment, la création du modèle était beaucoup plus simple que de comprendre le fonctionnement.  
+J'ai utilisé les bibliothèque numpy et pandas pour manipuler les matrices. 
+
+```python
+
+    df = pd.read_csv("data.csv")
+    df["vitesse2"] = df["vitesse"]**2 #Car ici on sait que le temps de survie en fonction de la vitesse a une forme de cloche.  
+    df["un"] = 1 # Colonne qui représente les Beta0 (temps de survie si tout les autres Betas sont à 0)
+
+    matrix_Y = df["time_lived"].to_numpy() #Matrice Y à prédire
+
+
+
+    matrix_X = df[["un", "resistance", "vitesse", "vitesse2", "satiete", "vision"]].to_numpy() #Matrice X, nos observations
+
+
+    # Beta_chapeau = (X'X^-1)X'Y
+    matric_X_transpose = matrix_X.transpose()
+    matrix_X_produit_transpose = np.dot(matric_X_transpose, matrix_X)
+    matrix_X_produit_transpose_invert = np.linalg.inv(matrix_X_produit_transpose)
+    matrix_X__before_final = np.dot(matrix_X_produit_transpose_invert, matric_X_transpose)
+    coef_beta = np.dot(matrix_X__before_final, matrix_Y) #Ici, on a donc les coefficients Beta. Il reste à vérifier si ils sont fiable
+    
+    
+    
+    y_chapeau = np.dot(matrix_X, coef_beta) # Notre estimation des temps de survie
+
+    residus = y_chapeau - matrix_Y # L'erreur de notre modèle
+
+    estimateur_variabilite_residuelle = np.mean((matrix_Y - y_chapeau)**2) #Erreur total du modèle 
+
+    estimateur_variabilite_naturel = np.mean((matrix_Y - np.mean(matrix_Y))**2) # Variabilité naturelle de la simulation (aléatoire)
+
+    coefficient_determination = 1 - estimateur_variabilite_residuelle/estimateur_variabilite_naturel # R², explique à quel point la matrice X impacte la matrice Y (est ce que les gènes sont important pour la survie)
+
+    variance_erreur = np.sum((matrix_Y - y_chapeau)**2)/(len(matrix_Y) - 6) #volume de hasard. Plus il est grand, plus c'est imprévisible
+
+    matrice_variance_covariance = matrix_X_produit_transpose_invert * variance_erreur #indique si les Beta risquent de changer si je relance une simulation
+
+    ecart_type_gene = np.sqrt(np.diag(matrice_variance_covariance)) #Marge d'erreur pour chaque gène. Plus il est gros pour chaque gène, moins il est solide
+
+    t_stat =  coef_beta/ecart_type_gene #La solidité de nos estimations, plus ils sont haut, plus le Beta_chapeau est fiable. 
+```
+
