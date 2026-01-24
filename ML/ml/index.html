@@ -1475,24 +1475,16 @@
 <h1 id="machine-learning">Machine Learning</h1>
 <p>Ici, vous trouverez un "journal de bord" des principales étapes de la création de mon modèle de Machine Learning. (Cette page me servira de mémento aussi).</p>
 <p>D'abord, j'ai créé une nouvelle branche sur GitHub intitulée "V3-ML". Cette branche aura moins d'interface et sera moins "user-friendly" que les autres versions. Cela se déroulera principalement dans la console où l'utilisateur aura le choix de comment remplir ses données. Il pourra choisir l'espérance et la variance de ses attributs. Il pourra aussi choisir le nombre de fois que toutes les simulations vont se répéter pour des données plus solides. Une fois cela fait, le modèle de ML lui dira quels sont les gènes les plus importants dans une simulation pauvre, une simulation équilibrée et une simulation riche (qui seront déjà définies). Le modèle sera capable de prédire sur ces données un échantillon de Minos qui sont susceptibles de survivre le plus longtemps. Enfin, l'utilisateur aura la possibilité de regarder X simulations où les Minos susceptibles de survivre auront un marquage.</p>
-<p>Ici, j'ai fait le choix discutable de « linéariser » artificiellement mes données. J'ai modifié les constantes de récompense et de coût afin que mes données soient plus linéaires et qu'il soit plus facile pour moi de créer mon premier modèle de ML.</p>
-<p><strong>À voir :</strong> ajouter du multiprocessing pour plus d'efficacité des simulations</p>
 <h2 id="documentation">Documentation</h2>
-<p>Voici les ressources que j'ai utilisées pour mon apprentissage :</p>
-<ul>
-<li>https://www.datacamp.com/fr/tutorial/linear-regression-in-python?dc_referrer=https%3A%2F%2Fwww.google.com%2F</li>
-<li>https://www.youtube.com/watch?v=CCzGRyO2CTc</li>
-</ul>
+<p>Pour cet apprentissage, j'ai utilisé les cours de François Husson, enseignant chercheur en statistiques. 
+- https://www.youtube.com/watch?v=CCzGRyO2CTc</p>
 <h2 id="plan-daction">Plan d'action</h2>
 <p>Après des recherches, j'ai trouvé que le modèle de ML qui conviendrait à mon projet et pas trop difficile à prendre en main est le modèle de régression linéaire multiple. Ici, pas de réseaux de neurones difficiles, on commence par les bases.</p>
 <h3 id="1-preparation-et-normalisation">1. Préparation et normalisation</h3>
-<ul>
-<li>[ ] Ne garder que les colonnes intéressantes (résistance, vitesse, satiété, vision, nb_minos, ratio_food) (X) et time_lived (Y)</li>
-<li>[ ] Garder dans un fichier config.json toutes les données de la config par défaut des simulations multiples</li>
-<li>[ ] Standardisation : <span class="arithmatex">\(z = \frac{x - \mu}{\sigma}\)</span> (écart par rapport à la moyenne au lieu de entre 0 et 1)</li>
-<li>[ ] Mélanger les données et garder 20% pour tester et 80% pour entraîner</li>
-</ul>
+<p>A la différence des rendu visuels, ici on essaie d'utiliser uniquement les donnnées parlantes. Je garde donc uniquement le génome et le temps de survie des Minos. 
+Je me suis rendu compte que ces données n'étaient pas normalisées. J'ai donc décider de les borner entre 0 et 1 mais c'était difficile car je ne pouvais pas connaitre le maximum ni le minimum à chaque simulation. J'ai donc fais le choix de les normaliser selon un écart à la moyenne (<span class="arithmatex">\(\mu\)</span> que je connais) avec la formule <span class="arithmatex">\(z = \frac{x - \mu}{\sigma}\)</span></p>
 <h2 id="notes-de-cours">Notes de cours</h2>
+<p>Vous trouverez ici les notes que j'ai prise du cours de François Husson. Tout ce qui est écrit ici est compris et maitrisé.  </p>
 <p>Ici, l'objectif est d'expliquer quels gènes ont un rôle important et de prédire le temps de vie d'un Minos en fonction de ses gènes.</p>
 <ul>
 <li>"Expliquer une variable quantitative Y en fonction de p variables quantitatives <span class="arithmatex">\(x_1, \ldots, x_p\)</span>"</li>
@@ -1700,6 +1692,47 @@ Y_n
 <h3 id="decision_1">Décision</h3>
 <div class="arithmatex">\[|T_{obs}| &gt; t_{n-p-1}(1 - \alpha/2) \Longrightarrow \text{rejet de } H_0 \text{ au seuil } \alpha\]</div>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../test_coef_regression.png" data-desc-position="bottom"><img alt="alt text" src="../test_coef_regression.png"></a></p>
+<h1 id="creation-du-modele">Création du modèle</h1>
+<p>Etonnamment, la création du modèle était beaucoup plus simple que de comprendre le fonctionnement.<br>
+J'ai utilisé les bibliothèque numpy et pandas pour manipuler les matrices. </p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data.csv"</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">df</span><span class="p">[</span><span class="s2">"vitesse2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"vitesse"</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="c1">#Car ici on sait que le temps de survie en fonction de la vitesse a une forme de cloche.  </span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">df</span><span class="p">[</span><span class="s2">"un"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Colonne qui représente les Beta0 (temps de survie si tout les autres Betas sont à 0)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">matrix_Y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"time_lived"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1">#Matrice Y à prédire</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">matrix_X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"un"</span><span class="p">,</span> <span class="s2">"resistance"</span><span class="p">,</span> <span class="s2">"vitesse"</span><span class="p">,</span> <span class="s2">"vitesse2"</span><span class="p">,</span> <span class="s2">"satiete"</span><span class="p">,</span> <span class="s2">"vision"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1">#Matrice X, nos observations</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="c1"># Beta_chapeau = (X'X^-1)X'Y</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">matric_X_transpose</span> <span class="o">=</span> <span class="n">matrix_X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">matrix_X_produit_transpose</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matric_X_transpose</span><span class="p">,</span> <span class="n">matrix_X</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">matrix_X_produit_transpose_invert</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">matrix_X_produit_transpose</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">matrix_X__before_final</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix_X_produit_transpose_invert</span><span class="p">,</span> <span class="n">matric_X_transpose</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">coef_beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix_X__before_final</span><span class="p">,</span> <span class="n">matrix_Y</span><span class="p">)</span> <span class="c1">#Ici, on a donc les coefficients Beta. Il reste à vérifier si ils sont fiable</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">y_chapeau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix_X</span><span class="p">,</span> <span class="n">coef_beta</span><span class="p">)</span> <span class="c1"># Notre estimation des temps de survie</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">residus</span> <span class="o">=</span> <span class="n">y_chapeau</span> <span class="o">-</span> <span class="n">matrix_Y</span> <span class="c1"># L'erreur de notre modèle</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">estimateur_variabilite_residuelle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">matrix_Y</span> <span class="o">-</span> <span class="n">y_chapeau</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#Erreur total du modèle </span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">estimateur_variabilite_naturel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">matrix_Y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">matrix_Y</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Variabilité naturelle de la simulation (aléatoire)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">coefficient_determination</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">estimateur_variabilite_residuelle</span><span class="o">/</span><span class="n">estimateur_variabilite_naturel</span> <span class="c1"># R², explique à quel point la matrice X impacte la matrice Y (est ce que les gènes sont important pour la survie)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="n">variance_erreur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">matrix_Y</span> <span class="o">-</span> <span class="n">y_chapeau</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix_Y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span> <span class="c1">#volume de hasard. Plus il est grand, plus c'est imprévisible</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">matrice_variance_covariance</span> <span class="o">=</span> <span class="n">matrix_X_produit_transpose_invert</span> <span class="o">*</span> <span class="n">variance_erreur</span> <span class="c1">#indique si les Beta risquent de changer si je relance une simulation</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">ecart_type_gene</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">matrice_variance_covariance</span><span class="p">))</span> <span class="c1">#Marge d'erreur pour chaque gène. Plus il est gros pour chaque gène, moins il est solide</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="n">t_stat</span> <span class="o">=</span>  <span class="n">coef_beta</span><span class="o">/</span><span class="n">ecart_type_gene</span> <span class="c1">#La solidité de nos estimations, plus ils sont haut, plus le Beta_chapeau est fiable. </span>
+</code></pre></div>
 
 
 
