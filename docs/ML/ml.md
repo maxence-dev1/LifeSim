@@ -353,3 +353,45 @@ J'ai utilisé les bibliothèque numpy et pandas pour manipuler les matrices.
     t_stat =  coef_beta/ecart_type_gene #La solidité de nos estimations, plus ils sont haut, plus le Beta_chapeau est fiable. 
 ```
 
+
+Voici à quoi ressemble l'interface console
+```Shell
+    --- CONFIGURATION DE LA SIMULATION ---
+    Mode : [E]asy ou [A]dvanced ? e
+    Nombre de simulations [10] : 10
+    Nombre de Minos par simulation [50] : 100
+    Ratio de nourriture (ex: 0.5) [0.5] : 0.1
+
+    Configuration terminée. Lancement de la simulation...
+    simulation numéro 0 finie. time : 711.0
+    simulation numéro 1 finie. time : 743.0
+    simulation numéro 2 finie. time : 999.0
+    simulation numéro 3 finie. time : 655.0
+    simulation numéro 4 finie. time : 895.0
+    simulation numéro 5 finie. time : 615.0
+    simulation numéro 6 finie. time : 827.0
+    simulation numéro 7 finie. time : 778.0
+    simulation numéro 8 finie. time : 660.0
+    simulation numéro 9 finie. time : 749.0
+    lecture des données...
+    création des matrices...
+    calcul des coefficients...
+    calcul de l'estimateur...
+    calcul des résidus...
+    calcul de l'estimateur de variabilité résiduelle...
+    calcul de l'estimateur de variabilité naturel...
+    calcul R²...
+    calcul de la variance de l'erreur...
+    calcul matrice variance covariance...
+    calcul ecart type gènes...
+    calcul |T|...
+    --------Résultats----------
+    R² : 0.368099118877358
+    Dans la simulation, la génétique explique 36.810% de la survie d'un Minos, les 63.190 sont dues aux aléas de l'environnement.
+    |T| : [36.489 16.396 -0.807  4.659  4.89  15.184]
+    temps de vie de base 241.914 (36.489 de fiabilité)
+    La résistance a un impact positif de 59.926
+    la vitesse n'a pas de réel impact
+    La satiété a un impact positif de 18.959
+    La vision a un impact positif de 56.831
+```
